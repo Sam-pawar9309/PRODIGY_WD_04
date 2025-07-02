@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Samruddhi | Galaxy Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #0f0c29;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      scroll-behavior: smooth;
+    }
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #b076f7;
+    }
+
+    /* Hero Section */
+    .hero-container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .profile-img-container {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(171, 116, 243, 0.6),
+                  0 0 60px rgba(201, 136, 248, 0.3),
+                  inset 0 0 20px rgba(129, 84, 197, 0.2);
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-img-container:hover {
+      transform: scale(1.05) rotate(1deg);
+      box-shadow: 0 0 35px rgba(190, 143, 240, 0.612),
+                  0 0 80px rgba(94, 32, 165, 0.5),
+                  inset 0 0 30px rgba(140, 72, 241, 0.4);
+    }
+
+    .profile-img {
+      width: 110%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .intro-heading {
+      font-size: 2.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro-heading span {
+      color: #9c4fd9;
+      text-shadow: 0 0 10px #a76cff78;
+    }
+
+    .intro-subtext {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-icons a {
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #a76cff;
+    }
+
+    .cta-button {
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      background-color: #a76cff;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #8c5ade;
+      transform: scale(1.05);
+    }
+
+    @keyframes floatImage {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Responsive Tweak */
+    @media (max-width: 768px) {
+      .intro-heading {
+        font-size: 2rem;
+      }
+
+      .intro-subtext {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: #b076f7;
+      margin-bottom: 2rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .skills-list li {
+     background: radial-gradient(circle at top left, #090984, #151523);
+     padding: 1rem;
+     border-radius: 16px;
+     font-weight: bold;
+     width: 160px;
+     height: 160px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     box-shadow: 0 0 10px  rgba(127, 90, 240, 0.3);
+     transition: transform 0.4s ease, box-shadow 0.4s ease;
+     transform-style: preserve-3d;
+    }
+
+    .skills-list li:hover {
+      transform: perspective(600px) rotateX(10deg) rotateY(-10deg) scale(1.05);
+      box-shadow: 0 0 15px #a76cff, 0 0 30px rgba(127, 90, 240, 0.6);
+    }
+
+    .skills-list li i {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #d7d1eb;
+      transition: transform 0.3s ease, color 0.4s, filter 0.4s;
+      animation: pulseGlow 4s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    .skills-list li:hover i {
+      color: #d5b9fe;
+      transform: scale(1.2) rotate(3deg);
+      filter: drop-shadow(0 0 10px #b195db68) drop-shadow(0 0 20px #af7aff7b);
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% {
+      text-shadow: 0 0 0px #a76cff;
+      transform: scale(1);
+    }
+    50% {
+      text-shadow: 0 0 15px #a76cff;
+      transform: scale(1.1);
+    }
+    }
+    
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+    }
+
+
+.project-card {
+
+  flex: 1 1 26%;
+  max-width: 28%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(167, 108, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(167, 108, 255, 0.4);
+}
+
+
+.project-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.project-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.project-card a {
+  color: #a76cff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.project-card a:hover {
+  color: #d7baff;
+}
+
+@media (max-width: 1024px) {
+  .project-card {
+    flex: 1 1 45%;
+    max-width: 46%;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+  .contact-container {
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 20px rgba(167, 108, 255, 0.2);
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(40px); }
+}
+
+.input-icon input,
+.input-icon textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: 1px solid #a76cff;
+  margin-bottom: 1rem;
+}
+
+button[type="submit"] {
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, #a76cff, #8159de);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  box-shadow: 0 0 15px #a76cffaa;
+  transform: scale(1.03);
+}
+
+.footer-icons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footer-icons a {
+  color: #fff;
+  font-size: 1.6rem;
+  transition: transform 0.3s, color 0.3s;
+  position: relative;
+}
+
+.footer-icons a:hover {
+  color: #a76cff;
+  transform: scale(1.2);
+  text-shadow: 0 0 10px #a76cff;
+}
+
+@media (max-width: 600px) {
+  #contact {
+    padding: 1rem;
+  }
+  .contact-container {
+    padding: 1.5rem;
+  }
+  .footer-icons {
+    gap: 1.5rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- HERO SECTION -->
+   <div class="hero-container" id="home">
+    <div class="profile-img-container">
+    <img src="images/sam-photo.png" alt="profile-img" class="profile-img" />
+    </div>
+    <h1 class="intro-heading">Hey, I’m <span>Samruddhi</span></h1>
+    <p class="intro-subtext">I'm a Computer Science student specializing in cloud computing, and I’m now beginning my hands-on journey in web development through an internship role.</p>
+    <div class="social-icons">
+      <a href="https://linkedin.com/in/samruddhi-pawar-0296942a2" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://github.com/Sam-pawar9309" target="_blank" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <a href="#projects" class="cta-button">View Projects</a>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>My Skills</h2>
+    <ul class="skills-list">
+      <li><i class="fas fa-code"></i>HTML5</li>
+      <li><i class="fab fa-css3-alt"></i>CSS3</li>
+      <li><i class="fab fa-js"></i>JavaScript</li>
+      <li><i class="fab fa-java"></i>Java</li>
+      <li><i class="fas fa-database"></i>MySQL</li>
+      <li><i class="fab fa-python"></i>Python</li>
+      <li><i class="fas fa-chart-line"></i>Pandas</li>
+      <li><i class="fas fa-paint-brush"></i>Canva</li>
+      <li><i class="fas fa-laptop-code"></i>UI/UX</li>
+      <li><i class="fab fa-github"></i>Git & GitHub</li>
+    </ul>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects-section" id="projects">
+  <h2>Projects</h2>
+  <div class="projects-grid">
+      <div class="project-card">
+      <img src="images/task 3.png" alt="Tic Tac Toe AI Screenshot" class="project-image" />
+      <h3><strong>Tic-Tac-Toe  Web Application</strong></h3>
+      <p> I have built a fully functional Tic Tac Toe game using HTML, CSS, and JavaScript.Implemented two-player and AI (Minimax) modes in my first Tic Tac Toe game project.</p>
+      <a href="https://github.com/Sam-pawar9309/PRODIGY_WD_03" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+      <img src="images/task-2.png" alt="Stopwatch App Screenshot" class="project-image" />
+      <h3><strong>Stopwatch Web Application</strong></h3>
+      <p>Created a responsive stopwatch web app with lap tracking, theme switching, and smooth UI transitions using HTML, CSS, and JavaScript. Designed for both clean aesthetics and usability.</p>
+      <a href="https://github.com/Sam-pawar9309/PRODIGY_WD_02" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+      <img src="images/task-1.png" alt="Sketch Shade Shine Screenshot" class="project-image" />
+      <h3><strong>Interactive Navigation Menu</strong></h3>
+      <p>Built a fixed, interactive navigation menu using HTML, CSS, and JavaScript. It responds to scroll and hover events, offering a smooth and user-friendly experience.</p>
+      <a href="https://github.com/Sam-pawar9309/PRODIGY_WD_01" target="_blank">View on GitHub</a>
+      </div>
+  </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem;">
+  <h2 style="margin-bottom: 2rem;">Contact Me</h2>
+  <div class="contact-footer-wrap" style="display: flex; flex-direction: column; align-items: center; gap: 2rem; width: 100%;">
+    <div class="contact-container">
+      <form action="mailto:samruddhipawar7171@gmail.com" method="post" enctype="text/plain">
+        <div class="input-icon">
+          <input type="text" placeholder="Your Name" required />
+        </div>
+        <div class="input-icon">
+          <input type="email" placeholder="Your Email" required />
+        </div>
+        <div class="input-icon">
+          <textarea rows="5" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    
+    </div>
+    <footer style="background: transparent; color: #aaa; text-align: center; width: 100%; margin-top: 40px;">
+      <p>&copy; 2025 Samruddhi Pawar. Built with 💜 under the stars.</p>
+      <div class="footer-icons">
+        <a href="https://github.com/Sam-pawar9309" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:samruddhipawar7171@gmail.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://linkedin.com/in/samruddhi-pawar-0296942a2" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </footer>
+  </div>
+</section>
+
+  <div class="modal" id="projectModal">
+    <div class="modal-content">
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+  
+  <button class="scroll-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">⬆</button>
+  
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    window.onload = function() {
+      document.getElementById("preloader").style.display = "none";
+    };
+    
+    particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/demo/particles.json');
+    AOS.init();
+
+    function filterProjects(category) {
+      const cards = document.querySelectorAll(".project-card");
+      cards.forEach(card => {
+        card.style.display = (category === "all" || card.dataset.category === category) ? "block" : "none";
+      });
+    }
+
+    function openModal(title, description) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalDescription").innerText = description;
+      document.getElementById("projectModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("projectModal").style.display = "none";
+    }
+
+    window.addEventListener("scroll", () => {
+      const scrollTopBtn = document.querySelector(".scroll-top");
+      if (window.scrollY > 300) scrollTopBtn.style.display = "block";
+      else scrollTopBtn.style.display = "none";
+    });
+  </script>
+</body>
+</html>
